@@ -88,7 +88,7 @@ elseif (${CMAKE_SYSTEM_NAME} MATCHES "Darwin" AND NOT DEFINED ENV{NIX_CC})
     )
 else()
     add_custom_command(OUTPUT ${OUTPUT}/timestamp
-       COMMAND ${PYTHON_EXECUTABLE}
+       COMMAND ${CMAKE_COMMAND} -E env "CFLAGS='$ENV{CFLAGS}'" ${PYTHON_EXECUTABLE}
        ARGS setup.py build_ext --inplace --rpath ../lib
        DEPENDS cryptominisat5
    )
